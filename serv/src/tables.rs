@@ -1,7 +1,7 @@
 use spacetimedb::{Identity, Timestamp, table};
 use crate::enums::*;
 
-#[table(name = users, public)]
+#[table(accessor = users, public)]
 #[derive(Clone)]
 pub struct User {
     #[primary_key]
@@ -11,7 +11,7 @@ pub struct User {
     pub created_at: Timestamp,
 }
 
-#[table(name = balances, public)]
+#[table(accessor = balances, public)]
 #[derive(Clone)]
 pub struct Balance {
     #[primary_key]
@@ -22,7 +22,7 @@ pub struct Balance {
     pub updated_at: Timestamp,
 }
 
-#[table(name = markets, public)]
+#[table(accessor = markets, public)]
 #[derive(Clone)]
 pub struct Market {
     #[primary_key]
@@ -52,7 +52,7 @@ pub struct Market {
     pub collateral: i64,
 }
 
-#[table(name = admin, public)]
+#[table(accessor = admin, public)]
 #[derive(Clone)]
 pub struct Admin {
     #[primary_key]
@@ -61,7 +61,7 @@ pub struct Admin {
     pub created_at: Timestamp,
 }
 
-#[table(name = trades, public)]
+#[table(accessor = trades, public)]
 #[derive(Clone)]
 pub struct Trade {
     #[primary_key]
@@ -82,7 +82,7 @@ pub struct Trade {
     pub timestamp: Timestamp,
 }
 
-#[table(name = positions, public)]
+#[table(accessor = positions, public)]
 #[derive(Clone)]
 pub struct Position {
     #[primary_key]
@@ -102,7 +102,7 @@ pub struct Position {
     pub updated_at: Timestamp,
 }
 
-#[table(name = price_history, public)]
+#[table(accessor = price_history, public)]
 #[derive(Clone)]
 pub struct PricePoint {
     #[primary_key]
@@ -119,7 +119,7 @@ pub struct PricePoint {
     pub timestamp: Timestamp,
 }
 
-#[table(name = market_stats, public)]
+#[table(accessor = market_stats, public)]
 #[derive(Clone)]
 pub struct MarketStats {
     #[primary_key]
@@ -132,7 +132,7 @@ pub struct MarketStats {
     pub updated_at: Timestamp,
 }
 
-#[table(name = user_stats, public)]
+#[table(accessor = user_stats, public)]
 #[derive(Clone)]
 pub struct UserStats {
     #[primary_key]

@@ -6,7 +6,7 @@ use crate::tables::*;
 
 #[reducer]
 pub fn register_user(ctx: &ReducerContext, username: String) {
-    let user_id = ctx.sender;
+    let user_id = ctx.sender();
 
     if ctx.db.users().id().find(&user_id).is_some() {
         return;
@@ -117,7 +117,7 @@ pub fn create_market(
     description: String,
     close_time: Timestamp,
 ) {
-    if !is_admin(ctx, ctx.sender) {
+    if !is_admin(ctx, ctx.sender()) {
         return;
     }
 
@@ -134,7 +134,7 @@ pub fn create_market(
         close_time,
         resolve_time: None,
         resolution: None,
-        created_by: ctx.sender,
+        created_by: ctx.sender(),
         created_at: ctx.timestamp,
         yes_reserves,
         no_reserves,
@@ -158,7 +158,7 @@ pub fn buy_shares(
     outcome: Outcome,
     amount: i64,
 ) {
-    let user_id = ctx.sender;
+    let user_id = ctx.sender();
 
     let mut market = match ctx.db.markets().id().find(&market_id) {
         Some(m) => m.clone(),
@@ -317,7 +317,7 @@ pub fn sell_shares(
     outcome: Outcome,
     shares: i64,
 ) {
-    let user_id = ctx.sender;
+    let user_id = ctx.sender();
 
     let mut market = match ctx.db.markets().id().find(&market_id) {
         Some(m) => m.clone(),
@@ -499,7 +499,7 @@ pub fn mark_market_resolved(
     market_id: u64,
     outcome: Outcome,
 ) {
-    if !is_admin(ctx, ctx.sender) {
+    if !is_admin(ctx, ctx.sender()) {
         return;
     }
     let mut market = match ctx.db.markets().id().find(&market_id) {
@@ -535,7 +535,7 @@ pub fn claim_payout(
     ctx: &ReducerContext,
     market_id: u64,
 ) {
-    let user_id = ctx.sender;
+    let user_id = ctx.sender();
 
     let market = match ctx.db.markets().id().find(&market_id) {
         Some(m) => m.clone(),
